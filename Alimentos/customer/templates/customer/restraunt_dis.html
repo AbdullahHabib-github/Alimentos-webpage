@@ -1,0 +1,27 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+
+<div class="container mb-5">
+    <div class = "row justify-content-center mt-5">
+        <div class="col-md-8 col-sm-12 p-4 text-center">
+            <h2>Available restraunts are:</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-1">
+        <div class="card col-md-5 col-sm-12  p-4 text-center">
+            {%for a in rest%}
+            <h3>{{a.name}}</h3>
+            <b> rating: {{a.rating}} </b>
+            <b> address: <b>  <h4>{{a.address}}</h4>
+            
+            <br><br>
+            {% endfor %}
+        
+
+
+        </div>
+
+    </div>
+</div>
+{% endblock content %}

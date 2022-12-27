@@ -1,0 +1,62 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+
+
+
+<div class="container mb-5">
+    <div class = "row justify-content-center mt-5">
+        <div class="col-md-8 col-sm-12  p-4 text-center">
+            <h1>Find your fav Alimento</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-1">
+        <div class="card col-md-5 col-sm-12  p-4 text-center">
+         
+            <form method="POST" action = "{% url 'restraunt' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label> <h4>Area</h4></label>
+                  <br>
+                      <select id="area_name" name = "area">
+                         <option>Select your Area</option>
+                         {%for a in areas%}
+                         <option value="{{ a.name}}">{{a.name}}</option>
+  
+                         {% endfor %}
+                         
+                        </select>
+                    
+                        <br>
+                        <br>
+
+                        <label> <h4>Food</h4></label>
+                        <br>
+                            <select id="food_name" name = "food">
+                               <option>Select your Food</option>
+                               {%for a in food_items%}
+                               <option value="{{ a.name}}">{{a.name}}</option>
+        
+                               {% endfor %}
+                               
+                              </select>
+                          
+                              <br>
+
+                        
+
+
+                      <br>
+               </div>
+               
+               <button type="submit" class="btn btn-primary mb-2">Enter</button>
+
+          
+            </form>
+
+               <br>          
+     
+
+
+
+{% endblock content %}

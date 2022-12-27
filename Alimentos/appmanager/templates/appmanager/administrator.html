@@ -1,0 +1,24 @@
+{% extends 'appmanager/base.html' %}
+
+{% block content %}
+
+<div class="container mb-5">
+    <div class = "row justify-content-center mt-5">
+        <div class="col-md-8 col-sm-12  p-4 text-center">
+            <h1>Find your fav Alimento</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-1">
+        <div class="card col-md-5 col-sm-12  p-4 text-center">
+         
+            <div class="container mb-5">
+                <a href="{% url 'addcity' %}" class="btn btn-primary btn-lg btn-block" role="button" >Update or add a new restraunt</a>
+                <a href="{% url 'addcity' %}" class="btn btn-secondary btn-lg btn-block" role="button" >Delete a restraunt</a>
+            </div>
+        
+
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
