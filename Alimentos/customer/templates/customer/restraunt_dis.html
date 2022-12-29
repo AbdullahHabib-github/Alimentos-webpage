@@ -1,27 +1,54 @@
 {% extends 'customer/base.html' %}
 
 {% block content %}
+  <style>
+    /* Add a background color and some padding */
+    body {
+      background-color: olive;
+      padding: 20px;
+    }
 
-<div class="container mb-5">
-    <div class = "row justify-content-center mt-5">
-        <div class="col-md-8 col-sm-12 p-4 text-center">
-            <h2>Available restraunts are:</h2>
-        </div>
-    </div>
-    <div class="row justify-content-center mt-1">
-        <div class="card col-md-5 col-sm-12  p-4 text-center">
-            {%for a in rest%}
-            <h3>{{a.name}}</h3>
-            <b> rating: {{a.rating}} </b>
-            <b> address: <b>  <h4>{{a.address}}</h4>
-            
-            <br><br>
+    /* Change the font for the headings */
+    h2, h3, h4 {
+      font-family: "Times New Roman", Times, serif;
+    }
+
+    /* Center the cards and add some rounded corners and box shadow */
+    .card {
+      display: flex;
+      justify-content: center;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    /* Add some padding and margin to the cards */
+    .card p, .card h3 {
+      padding: 20px;
+      margin: 0;
+    }
+
+    /* Change the color of the rating text */
+    .card b {
+      color: red;
+    }
+  </style>
+  <div class="container mb-5">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8 col-sm-12 p-4 text-center">
+              <h2>Available restraunts are:</h2>
+            </div>
+          </div>
+          <div class="row justify-content-center mt-1">
+            {% for a in rest %}
+              <div class="card col-md-5 col-sm-12 p-4 text-center">
+                <h3>{{ a.name }}</h3>
+                <b>rating: {{ a.rating }}</b>
+                <b>address:</b>
+                <h4>{{ a.address }}</h4>
+                <br><br>
+              </div>
             {% endfor %}
-        
-
-
+          </div>
         </div>
-
-    </div>
-</div>
-{% endblock content %}
+      {% endblock content %}
+      
