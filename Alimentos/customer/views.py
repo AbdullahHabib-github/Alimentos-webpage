@@ -1,51 +1,61 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db import connection
 from django.views import View
-from .models import City,Area,Restraunt,Food_item
+from .models import Restraunt
+from .forms import Choosecity,ChooseAreaFood
+
 
 # Create your views here.
 
 
 class Index (View):
-    def get(self,request,*args,**kwargs):
-        # get every item from each catergory
-        #cities = City.objects.all()
-        cities  = City.objects.raw("SELECT * FROM customer_city")
  
-        context = {
-            'cities': cities,
-        }
+    
+    def get(self,request,*args,**kwargs):
         
-        # render the template
-        return render(request, 'customer/index.html',context)
-
+        form = Choosecity()
+        return render(request, 'customer/index.html', {'form': form})
+        
 
 
     def post(self, request, *args, **kwargs):  
-        city_name = request.POST.getlist('city')
 
-        areas  = Area.objects.raw("SELECT * FROM customer_area  where city_id in (select id from customer_city where name = '{}')".format(city_name[0]))
+        form = Choosecity(request.POST)
+        if form.is_valid():
 
-        food_items  = Food_item.objects.raw("SELECT * FROM customer_food_item")
+            data = form.cleaned_data['City_id']
 
-
-        context = {
-        'areas':areas,
-        'food_items':food_items,
-        }
-
-        return render(request, 'customer/area_dropdown.html', context) 
+            request.session['my_data'] = data
+            return redirect('areaandfood')
+        
         
 
+class AreaandFood (View):
+     
+    def get(self,request,*args,**kwargs):
+
+        # form_city_id = request.session.get('my_data')
+        form = ChooseAreaFood()#form_city_id)
+        # del request.session['my_data']
+        return render(request, 'customer/area_dropdown.html', {'form': form})
         
+    def post(self,request,*args,**kwargs):
 
         
+        form = ChooseAreaFood(request.POST)
+       
+        if form.is_valid():
 
-
-# class food_area(View):
-#     def get(self,request,*args,**kwargs):
-#         return render(request, 'customer/area_dropdown.html')
+            data = form.cleaned_data['Area_id']
+            data2 = form.cleaned_data['Food_id']
         
+            request.session['my_data2'] = data
+            request.session['my_data3'] = data2
+            return redirect('restraunt')
+
+
+
+       
 
 class About(View):
     def get(self,request,*args,**kwargs):
@@ -54,16 +64,15 @@ class About(View):
 
 
 class Restruantdisplay(View):
+
     def get(self,request,*args,**kwargs):
-        return render(request, 'customer/restraunt_dis.html')
-    
 
+        form_area_id = request.session.get('my_data2')
+        form_food_id = request.session.get('my_data3')
+        del request.session['my_data2']
+        del request.session['my_data3']
 
-    def post(self,request,*args,**kwargs):
-        
-        area_name = request.POST.get('area')
-        food_name = request.POST.get('food')
-        rest = Restraunt.objects.raw("SELECT * FROM customer_restraunt where area_id in (select id from customer_area where name = '{}') and Food_item_id in (select id from customer_Food_item where name = '{}')".format(area_name,food_name))
+        rest = Restraunt.objects.raw("SELECT * FROM customer_restraunt where (Area_id = {} and Food_item_id = {})".format(form_area_id,form_food_id))
         context = {
         'rest':rest,
         }
@@ -71,4 +80,4 @@ class Restruantdisplay(View):
         return render(request, 'customer/restraunt_dis.html',context) 
 
 
-
+   
