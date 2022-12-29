@@ -15,15 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from customer.views import Index, About,Restruantdisplay
-from appmanager.views import Admin,Addcity,Junk
+from customer.views import Index, About,Restruantdisplay,AreaandFood
+from appmanager.views import Admin,Addcity,Del,Deleted,Added
 
 urlpatterns = [
     path('',Index.as_view(),name = 'index'),
+    path('areaandfood/',AreaandFood.as_view(),name='areaandfood'),
     path('about/',About.as_view(),name = 'about'),
     path('restraunt/',Restruantdisplay.as_view(),name = 'restraunt'),
     path('addcity/',Addcity.as_view(),name = 'addcity'),
     path('administrator/',Admin.as_view(),name = 'administrator'),
+    path('Del/',Del.as_view(),name = 'Delete'),
+    path('Deleted/',Deleted.as_view(),name = 'deleted'),
+    path('Added/',Added.as_view(),name="added"),
     
-    path('junk/',Junk.as_view(),name = 'junk'),
 ] 
