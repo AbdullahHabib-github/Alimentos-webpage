@@ -6,28 +6,11 @@
     
     <div class="row justify-content-center mt-1">
         <div class="card col-md-5 col-sm-12  p-4 text-center">
-            <form method="POST" action = "{% url 'addcity' %}" >
+            <form action="{% url 'addcity' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                 <div class="form-group">
-                  <label for="CityName">Enter the city name</label>
-                  <input required class="form-control" type="text" placeholder="Islamabad" name="CityName"/>
-                  <label for="AreaName">Enter the Area</label>
-                  <input required class="form-control" type="text" placeholder="F-10 Islamabad" name="AreaName"/>
-                  <label for="FoodName">Enter the Food</label>
-                  <input required class="form-control" type="text" placeholder="Biryani" name="FoodName"/>
-
-
-
-
-                  <label for="FileName" class="form-label">Upload a file</label>
-                  <input class="form-control" type="file" name="FileName" />
-               
-               
-                  
-                </div>
-                <button type="submit" class="btn btn-primary mb-2">Enter</button>
-
-              </form>
+                {{ form.as_table }}
+                <input type="submit" value="Submit">
+            </form>
               
 
         </div>
