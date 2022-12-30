@@ -1,4 +1,4 @@
-{% extends 'customer/base.html' %}
+{% extends 'appmanager/base.html' %}
 
 {% block content %}
   <style>
@@ -36,7 +36,11 @@
     <div class="row justify-content-center mt-1">
       <div class="card col-md-5 col-sm-12 p-4 text-center">
         <p>The restruant has been deleted successfully</p>
+
       </div>
+      <p> if you want to undo delete, press the button below: </p>
+      <a href="{% url 'D' %}" class="btn btn-secondary btn-lg btn-block" role="button" >Roll Back</a>
+
     </div>
 </div>
 {% endblock content %}
