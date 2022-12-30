@@ -18,7 +18,7 @@
   <div class="container mb-5">
     <div class="row justify-content-center mt-1">
       <div class="card col-md-5 col-sm-12 p-4 text-center">
-        <form action="{% url 'addcity' %}" method="post" enctype="multipart/form-data">
+        <form action="{% url 'addrest' %}" method="post" enctype="multipart/form-data">
           {% csrf_token %}
           <table>
             {{ form.as_table }}
