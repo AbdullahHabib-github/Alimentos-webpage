@@ -1,20 +1,31 @@
 {% extends 'appmanager/base.html' %}
 
 {% block content %}
-
-<div class="container mb-5">
-    
+  <style>
+    form {
+      background-color: lightgrey;
+      border-radius: 15px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 10px;
+    }
+  </style>
+  <div class="container mb-5">
     <div class="row justify-content-center mt-1">
-        <div class="card col-md-5 col-sm-12  p-4 text-center">
-            <form action="{% url 'addcity' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_table }}
-                <input type="submit" value="Submit">
-            </form>
-              
-
-        </div>
-
+      <div class="card col-md-5 col-sm-12 p-4 text-center">
+        <form action="{% url 'addcity' %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <table>
+            {{ form.as_table }}
+          </table>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
     </div>
-</div>
+  </div>
 {% endblock content %}
