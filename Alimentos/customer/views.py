@@ -79,5 +79,4 @@ class Restruantdisplay(View):
         
         return render(request, 'customer/restraunt_dis.html',context) 
 
-
-   
+    

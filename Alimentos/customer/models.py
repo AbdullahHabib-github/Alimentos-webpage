@@ -36,7 +36,7 @@ class Restraunt (models.Model):
     Food_item = models.ForeignKey(Food_item, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     address =  models.CharField(max_length=200)
-    rating = models.IntegerField()
+    rating = models.FloatField()
     
     
     def __str__(self):
