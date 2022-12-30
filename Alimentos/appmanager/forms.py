@@ -10,11 +10,11 @@ class Addrestform(forms.Form):
     Form_file = forms.FileField(label='choose a file')
 
 
+
 class Chooserestraunt(forms.Form):
         
     with connection.cursor() as cursor:
             cursor.execute("SELECT id , name FROM customer_restraunt")
             rest = cursor.fetchall()
             rest_id= forms.IntegerField(label='Choose a restraunt',  widget=forms.Select(choices=rest))
-    
     

@@ -46,7 +46,7 @@ class Addrest(View):
             if not food:
                 with connection.cursor() as cursor:
                     cursor.execute("INSERT INTO  customer_food_item (name) VALUES ('{}')".format(F))
-
+           ##all tables have food,area or city
             with connection.cursor() as cursor:
                 cursor.execute("SELECT id FROM customer_area where (name = '{}' and City_id in (select id from customer_city where name ='{}'))".format(A,C))
                 # cursor.execute("SELECT id FROM customer_area where (name = '{}' and City_id = {})".format(A,1))
@@ -54,15 +54,11 @@ class Addrest(View):
                 cursor.execute("SELECT id FROM customer_food_item where name = '{}'".format(F))
                 Fr = cursor.fetchall()
                      
-            # print(," ",Ar[0][0])
-            # FI = form2.cleaned_data['Form_file']
             df = pd.read_excel(request.FILES['Form_file'], names=["name","rating","address"])
-            df.address = df.address.str.split(" · ").str[1]
+            # df.address = df.address.str.split(" · ").str[1]
             mask = df.address.str.contains("P3")
             df = df[~mask]
             df.dropna(how="any",inplace=True) 
-            # with connection.cursor() as cursor:
-            #    cursor.execute("Insert into customer_restraunt  values (id  ={})".format(data))
             
             for index, row in df.iterrows():
                   with connection.cursor() as cursor:
